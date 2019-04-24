@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <span class="navbar-brand">Acme Bank</span>
+</nav>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header" style="background:#fff">
+      <h3 [style.color]="'#CC2249'"> Account List</h3>
+    </div>
+    <div class="card-content">
+      <table class="table table-striped">
+        <thead>
+          <th>Account Number</th>
+          <th>Account Type</th>
+          <th>Balance</th>
+          <th>&nbsp;</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts ">
+            <td>{{account.account_number}}</td>
+            <td>{{account.account_type}}</td>
+            <td>{{formatBalance(account.balance)}}</td>
+            <td style="text-align: center"><button class="btn" [ngClass]="{'btn-success':canWithdraw(account),'btn-secondary':!canWithdraw(account)}"
+                [disabled]="!canWithdraw(account)" (click)="withdraw(account)">Withdraw</button></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">
+              <h4>Balance</h4>
+            </td>
+            <td colspan="2">
+              <h4>ZAR {{balance_string| number: '.2'}}</h4>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
